@@ -52,6 +52,7 @@ namespace CustomerApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                客戶銀行資訊.是否已刪除 = false;
                 db.客戶銀行資訊.Add(客戶銀行資訊);
                 db.SaveChanges();
                 return RedirectToAction("Index");

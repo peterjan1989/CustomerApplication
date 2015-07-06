@@ -50,6 +50,7 @@ namespace CustomerApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                客戶資料.是否已刪除 = false;
                 db.客戶資料.Add(客戶資料);
                 db.SaveChanges();
                 return RedirectToAction("Index");

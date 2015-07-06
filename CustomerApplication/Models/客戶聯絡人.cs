@@ -17,18 +17,18 @@ namespace CustomerApplication.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "帳戶號碼 必填")]
+        [Required(ErrorMessage = "客戶Id 必填")]
         public int 客戶Id { get; set; }
 
-        [Required(ErrorMessage = "帳戶號碼 必填")]
+        [Required(ErrorMessage = "職稱 必填")]
         [StringLength(50)]
         public string 職稱 { get; set; }
 
-        [Required(ErrorMessage = "帳戶號碼 必填")]
+        [Required(ErrorMessage = "姓名 必填")]
         [StringLength(50)]
         public string 姓名 { get; set; }
 
-        [Required(ErrorMessage = "帳戶號碼 必填")]
+        [Required(ErrorMessage = "Email 必填")]
         [StringLength(250)]
         [EmailAddress]
         public string Email { get; set; }

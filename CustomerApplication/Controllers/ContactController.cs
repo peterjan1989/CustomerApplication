@@ -52,6 +52,7 @@ namespace CustomerApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                客戶聯絡人.是否已刪除 = false;
                 db.客戶聯絡人.Add(客戶聯絡人);
                 db.SaveChanges();
                 return RedirectToAction("Index");
