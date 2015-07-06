@@ -50,7 +50,7 @@ namespace CustomerApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話,是否已刪除")] 客戶聯絡人 客戶聯絡人)
         {
-            var tempContact = db.客戶聯絡人.Where(c => c.客戶Id == 客戶聯絡人.客戶Id && c.Email == 客戶聯絡人.Email && c.是否已刪除 == false);
+            var tempContact = db.客戶聯絡人.Where(c => c.客戶Id == 客戶聯絡人.客戶Id && c.Email.ToUpper() == 客戶聯絡人.Email.ToUpper() && c.是否已刪除 == false);
 
             if (tempContact.ToList().Count > 0)
             {
@@ -93,7 +93,7 @@ namespace CustomerApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話,是否已刪除")] 客戶聯絡人 客戶聯絡人)
         {
-            var tempContact = db.客戶聯絡人.Where(c => c.客戶Id == 客戶聯絡人.客戶Id && c.Email == 客戶聯絡人.Email && c.是否已刪除 == false);
+            var tempContact = db.客戶聯絡人.Where(c => c.客戶Id == 客戶聯絡人.客戶Id && c.Email.ToUpper() == 客戶聯絡人.Email.ToUpper() && c.是否已刪除 == false);
 
             if (tempContact.ToList().Count > 0)
             {
