@@ -10,7 +10,7 @@ using CustomerApplication.Models;
 
 namespace CustomerApplication.Controllers
 {
-    public class RepostViewsController : Controller
+    public class ReportViewsController : Controller
     {
         private CustonerEntities db = new CustonerEntities();
 
