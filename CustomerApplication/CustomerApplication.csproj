@@ -173,6 +173,7 @@
     <Compile Include="Controllers\BankInfoController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\RepostViewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -282,6 +283,11 @@
     <Content Include="Views\BankInfo\Details.cshtml" />
     <Content Include="Views\BankInfo\Edit.cshtml" />
     <Content Include="Views\BankInfo\Index.cshtml" />
+    <Content Include="Views\RepostViews\Create.cshtml" />
+    <Content Include="Views\RepostViews\Delete.cshtml" />
+    <Content Include="Views\RepostViews\Details.cshtml" />
+    <Content Include="Views\RepostViews\Edit.cshtml" />
+    <Content Include="Views\RepostViews\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
