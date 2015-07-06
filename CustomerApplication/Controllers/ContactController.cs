@@ -50,6 +50,14 @@ namespace CustomerApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話,是否已刪除")] 客戶聯絡人 客戶聯絡人)
         {
+            var tempContact = db.客戶聯絡人.Where(c => c.客戶Id == 客戶聯絡人.客戶Id && c.Email == 客戶聯絡人.Email && c.是否已刪除 == false);
+
+            if (tempContact.ToList().Count > 0)
+            {
+                ViewBag.客戶Id = new SelectList(db.客戶資料.Where(c => c.是否已刪除 == false), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
+                return View(客戶聯絡人);
+            }
+
             if (ModelState.IsValid)
             {
                 客戶聯絡人.是否已刪除 = false;
@@ -85,6 +93,14 @@ namespace CustomerApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話,是否已刪除")] 客戶聯絡人 客戶聯絡人)
         {
+            var tempContact = db.客戶聯絡人.Where(c => c.客戶Id == 客戶聯絡人.客戶Id && c.Email == 客戶聯絡人.Email && c.是否已刪除 == false);
+
+            if (tempContact.ToList().Count > 0)
+            {
+                ViewBag.客戶Id = new SelectList(db.客戶資料.Where(c => c.是否已刪除 == false), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
+                return View(客戶聯絡人);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(客戶聯絡人).State = EntityState.Modified;
