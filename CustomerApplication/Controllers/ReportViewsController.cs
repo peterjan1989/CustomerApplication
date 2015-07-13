@@ -12,7 +12,7 @@ namespace CustomerApplication.Controllers
 {
     public class ReportViewsController : Controller
     {
-        private CustonerEntities db = new CustonerEntities();
+        private CustomerEntities db = new CustomerEntities();
 
         // GET: RepostViews
         public ActionResult Index()

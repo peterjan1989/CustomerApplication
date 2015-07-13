@@ -12,12 +12,13 @@ namespace CustomerApplication.Controllers
 {
     public class CustomerController : Controller
     {
-        private CustonerEntities db = new CustonerEntities();
+        //private CustonerEntities db = new CustonerEntities();
+        客戶資料Repository repo = new 客戶資料Repository();
 
         // GET: Customer
         public ActionResult Index()
         {
-            return View(db.客戶資料.Where(c => c.是否已刪除 == false).ToList());
+            return View(repo.All().ToList());
         }
 
         // GET: Customer/Details/5
@@ -27,7 +28,7 @@ namespace CustomerApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -50,9 +51,8 @@ namespace CustomerApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                客戶資料.是否已刪除 = false;
-                db.客戶資料.Add(客戶資料);
-                db.SaveChanges();
+                repo.Add(客戶資料);
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +66,8 @@ namespace CustomerApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            //客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -83,8 +84,10 @@ namespace CustomerApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(客戶資料).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(客戶資料).State = EntityState.Modified;
+                //db.SaveChanges();
+                repo.Update(客戶資料);
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
             return View(客戶資料);
@@ -97,7 +100,8 @@ namespace CustomerApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            //客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -110,20 +114,31 @@ namespace CustomerApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
-            客戶資料.是否已刪除 = true;
-            //db.客戶資料.Remove(客戶資料);
-            db.SaveChanges();
+            //客戶資料 客戶資料 = db.客戶資料.Find(id);
+            //客戶資料.是否已刪除 = true;
+            ////db.客戶資料.Remove(客戶資料);
+            //db.SaveChanges();
+
+            客戶聯絡人Repository repoC = new 客戶聯絡人Repository();
+            repoC.DeleteRange(repoC.All().Where(c => c.客戶Id == id));
+            repoC.UnitOfWork.Commit();
+
+            客戶銀行資訊Repository repoB = new 客戶銀行資訊Repository();
+            repoB.DeleteRange(repoB.All().Where(c => c.客戶Id == id));
+            repoB.UnitOfWork.Commit();
+
+            repo.Delete(repo.Find(id));
+            repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

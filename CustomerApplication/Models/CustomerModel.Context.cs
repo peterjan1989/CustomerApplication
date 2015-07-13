@@ -13,9 +13,9 @@ namespace CustomerApplication.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CustonerEntities : DbContext
+    public partial class CustomerEntities : DbContext
     {
-        public CustonerEntities()
+        public CustomerEntities()
             : base("name=CustonerEntities")
         {
         }
